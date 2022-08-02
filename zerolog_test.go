@@ -18,7 +18,7 @@ func BenchmarkZerologTextPositive(b *testing.B) {
 	})
 
 	if stream.WriteCount() != uint64(b.N) {
-		b.Fatalf("Log write count")
+		b.Fatalf("Log write count got %d, want %d", stream.WriteCount(), b.N)
 	}
 }
 

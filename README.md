@@ -23,6 +23,10 @@ On a terminal, just execute:
 
 ```shell
 make
+
+	go test -cpu=1,2,4 -benchmem -benchtime=5s -bench "Benchmark.*TextNegative" |tee TextNegative.txt
+	benchstat -csv -sort -name TextNegative.txt > text.csv
+  https://www.convertcsv.com/csv-to-markdown.htm
 ```
 
 # Results
@@ -58,25 +62,59 @@ negative tests.
 
 ### TextPositive
 
-| test                    | op time        | op alloc sz  | op alloc count |
-|-------------------------|----------------|--------------|----------------|
-| GokitTextPositive-4     |   442ns ± 4%   |    256B ± 0% |      4.00 ± 0% |
-| GologgingTextPositive-4 |   628ns ± 1%   |    920B ± 0% |      17.0 ± 0% |
-| Log15TextPositive-4     |  3.60µs ± 3%   |  1.12kB ± 0% |      24.0 ± 0% |
-| LogrusTextPositive-4    |   665ns ± 2%   |    320B ± 0% |      15.0 ± 0% |
-| SeelogTextPositive-4    |  2.18µs ± 1%   |    440B ± 0% |      11.0 ± 0% |
-| ZerologTextPositive-4   | **130ns ± 4%** | **0.00B**    |    **0.00**    |
+|name                   |time/op (ns/op)      |alloc/op (B/op)|allocs/op (allocs/op)|
+|-----------------------|---------------------|---------------|---------------------|
+|ZerologTextPositive-4  |102.8                |0              |0                    |
+|ZerologTextPositive-2  |189.2                |0              |0                    |
+|ZerologTextPositive    |346.6                |0              |0                    |
+|SeelogTextPositive-4   |1199                 |432            |11                   |
+|SeelogTextPositive-2   |1204                 |432            |11                   |
+|SeelogTextPositive     |1009                 |432            |11                   |
+|LogrusTextPositive-4   |1783                 |520            |15                   |
+|LogrusTextPositive-2   |1776                 |520            |15                   |
+|LogrusTextPositive     |1477                 |520            |15                   |
+|Log15TextPositive-4    |1803                 |904            |14                   |
+|Log15TextPositive-2    |1833                 |904            |14                   |
+|Log15TextPositive      |1639                 |904            |14                   |
+|GologgingTextPositive-4|353.4                |912            |16                   |
+|GologgingTextPositive-2|584.6                |912            |16                   |
+|GologgingTextPositive  |1035                 |912            |16                   |
+|GokitTextPositive-4    |225.8                |256            |4                    |
+|GokitTextPositive-2    |394.2                |256            |4                    |
+|GokitTextPositive      |723.1                |256            |4                    |
+|GoLogTextPositive-4    |128.8                |0              |0                    |
+|GoLogTextPositive-2    |102.4                |0              |0                    |
+|GoLogTextPositive      |124.5                |0              |0                    |
 
 ### TextNegative
 
-| test                    | op time         | op alloc sz | op alloc count |
-|-------------------------|-----------------|-------------|----------------|
-| GokitTextNegative-4     |   16.7ns ± 1%   |  32.0B ± 0% |      1.00 ± 0% |
-| GologgingTextNegative-4 |   61.4ns ± 1%   |   144B ± 0% |      3.00 ± 0% |
-| Log15TextNegative-4     |    142ns ± 3%   |   128B ± 0% |      2.00 ± 0% |
-| LogrusTextNegative-4    | **0.98ns ± 4%** |**0.00B**    |    **0.00**    |
-| SeelogTextNegative-4    |   22.5ns ± 2%   |  48.0B ± 0% |      2.00 ± 0% |
-| ZerologTextNegative-4   |   4.34ns ± 0%   |**0.00B**    |    **0.00**    |
+|name                   |time/op (ns/op)      |alloc/op (B/op)|allocs/op (allocs/op)|
+|-----------------------|---------------------|---------------|---------------------|
+|ZerologTextNegative-4  |0.6935               |0              |0                    |
+|ZerologTextNegative-2  |1.327                |0              |0                    |
+|ZerologTextNegative    |2.575                |0              |0                    |
+|ZapTextNegative-4      |1.678                |0              |0                    |
+|ZapTextNegative-2      |3.199                |0              |0                    |
+|ZapTextNegative        |6.274                |0              |0                    |
+|SeelogTextNegative-4   |11.85                |40             |2                    |
+|SeelogTextNegative-2   |20.88                |40             |2                    |
+|SeelogTextNegative     |38.02                |40             |2                    |
+|LogrusTextNegative-4   |0.5767               |0              |0                    |
+|LogrusTextNegative-2   |1.102                |0              |0                    |
+|LogrusTextNegative     |2.181                |0              |0                    |
+|Log15TextNegative-4    |213.9                |440            |3                    |
+|Log15TextNegative-2    |387.7                |440            |3                    |
+|Log15TextNegative      |728.8                |440            |3                    |
+|GologgingTextNegative-4|46                   |144            |2                    |
+|GologgingTextNegative-2|70.91                |144            |2                    |
+|GologgingTextNegative  |105.5                |144            |2                    |
+|GokitTextNegative-4    |7.097                |32             |1                    |
+|GokitTextNegative-2    |12.4                 |32             |1                    |
+|GokitTextNegative      |21.83                |32             |1                    |
+|GoLogTextNegative-4    |2.2                  |0              |0                    |
+|GoLogTextNegative-2    |4.272                |0              |0                    |
+|GoLogTextNegative      |8.202                |0              |0                    |
+
 
 ### JSONPositive
 
@@ -122,18 +160,48 @@ negative tests.
 
 ### JSONPositive
 
-| test                           | ops      | ns/op         | bytes/op    | allocs/op       |
-|--------------------------------|----------|---------------|-------------|-----------------|
-| BenchmarkGokitJSONPositive-4   |  5000000 |  1398 ns/op   | 1552 B/op   |  24 allocs/op   |
-| BenchmarkLog15JSONPositive-4   |  1000000 |  6599 ns/op   | 2008 B/op   |  30 allocs/op   |
-| BenchmarkLogrusJSONPositive-4  |  5000000 |  1761 ns/op   | 2450 B/op   |  33 allocs/op   |
-| BenchmarkZerologJSONPositive-4 | 30000000 | **195 ns/op** |  **0 B/op** | **0 allocs/op** |
+|name                   |time/op (ns/op)      |alloc/op (B/op)|allocs/op (allocs/op)|
+|-----------------------|---------------------|---------------|---------------------|
+|ZerologJSONPositive-4  |142.5                |0              |0                    |
+|ZerologJSONPositive-2  |256.9                |0              |0                    |
+|ZerologJSONPositive    |475.4                |0              |0                    |
+|ZapJSONPositive-4      |251.7                |192            |1                    |
+|ZapJSONPositive-2      |395.9                |192            |1                    |
+|ZapJSONPositive        |721.9                |192            |1                    |
+|LogrusJSONPositive-4   |3744                 |2258           |34                   |
+|LogrusJSONPositive-2   |3514                 |2256           |34                   |
+|LogrusJSONPositive     |3193                 |2256           |34                   |
+|Log15JSONPositive-4    |3977                 |2056           |30                   |
+|Log15JSONPositive-2    |3758                 |2056           |30                   |
+|Log15JSONPositive      |3487                 |2056           |30                   |
+|GokitJSONPositive-4    |746.8                |1592           |24                   |
+|GokitJSONPositive-2    |1327                 |1592           |24                   |
+|GokitJSONPositive      |2407                 |1592           |24                   |
+|GoLogJSONPositive-4    |253.6                |64             |1                    |
+|GoLogJSONPositive-2    |338.2                |64             |1                    |
+|GoLogJSONPositive      |588                  |64             |1                    |
+
 
 ### JSONNegative
 
-| test                           | ops        | ns/op          | bytes/op   | allocs/op       |
-|--------------------------------|------------|----------------|------------|-----------------|
-| BenchmarkGokitJSONNegative-4   |  300000000 |   27.0 ns/op   | 128 B/op   |   1 allocs/op   |
-| BenchmarkLog15JSONNegative-4   |   30000000 |    188 ns/op   | 320 B/op   |   3 allocs/op   |
-| BenchmarkLogrusJSONNegative-4  |   30000000 |    255 ns/op   | 752 B/op   |   5 allocs/op   |
-| BenchmarkZerologJSONNegative-4 | 1000000000 | **6.26 ns/op** | **0 B/op** | **0 allocs/op** |
+|name                   |time/op (ns/op)      |alloc/op (B/op)|allocs/op (allocs/op)|
+|-----------------------|---------------------|---------------|---------------------|
+|ZerologJSONNegative-4  |1.749                |0              |0                    |
+|ZerologJSONNegative-2  |3.257                |0              |0                    |
+|ZerologJSONNegative    |6.391                |0              |0                    |
+|ZapJSONNegative-4      |24.59                |192            |1                    |
+|ZapJSONNegative-2      |34.25                |192            |1                    |
+|ZapJSONNegative        |51.37                |192            |1                    |
+|LogrusJSONNegative-4   |98.2                 |496            |4                    |
+|LogrusJSONNegative-2   |161.2                |496            |4                    |
+|LogrusJSONNegative     |286.1                |496            |4                    |
+|Log15JSONNegative-4    |238.7                |632            |5                    |
+|Log15JSONNegative-2    |423.6                |632            |5                    |
+|Log15JSONNegative      |776.8                |632            |5                    |
+|GokitJSONNegative-4    |14.55                |128            |1                    |
+|GokitJSONNegative-2    |20.91                |128            |1                    |
+|GokitJSONNegative      |31.1                 |128            |1                    |
+|GoLogJSONNegative-4    |26.71                |64             |1                    |
+|GoLogJSONNegative-2    |27.54                |64             |1                    |
+|GoLogJSONNegative      |41.9                 |64             |1                    |
+
