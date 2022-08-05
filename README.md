@@ -27,7 +27,7 @@ make
 ```
 
 # Results
-`
+```
 $ go test -v -benchmem -run=^$$ -bench=. ./...
 goos: darwin
 goarch: arm64
@@ -185,4 +185,4 @@ GoLogTextNegative-8        0.00
 GoLogJSONPositive-8        6.00 ± 0%
 GoLogJSONNegative-8        1.00 ± 0%
 BuildinTextPositive-8      1.00 ± 0%
-`
+```
