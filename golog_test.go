@@ -3,19 +3,28 @@ package bench
 import (
 	"testing"
 
-	log "github.com/millken/golog"
+	"github.com/millken/golog"
+	"github.com/millken/golog/config"
+	"github.com/millken/golog/log"
 )
 
 func BenchmarkGoLogTextPositive(b *testing.B) {
 	stream := &blackholeStream{}
-	handler := log.NewLoggerHandler(stream)
-	formatter := log.NewTextFormatter()
-	formatter.NoColor = true
-	formatter.DisableTimestamp = true
-	handler.SetFormatter(formatter)
-	handler.SetLevel(log.InfoLevel)
-	logger := log.NewLogger()
-	logger.AddHandler(handler)
+	cfg := config.Config{
+		Level:    log.INFO,
+		Encoding: "console",
+		ConsoleEncoderConfig: config.ConsoleEncoderConfig{
+			DisableTimestamp: true,
+		},
+		Writer: config.WriterConfig{
+			Type:         "custom",
+			CustomWriter: stream,
+		},
+	}
+	logger, err := golog.NewLoggerByConfig("test", cfg)
+	if err != nil {
+		b.Fatal(err)
+	}
 	b.ResetTimer()
 
 	b.RunParallel(func(pb *testing.PB) {
@@ -31,14 +40,21 @@ func BenchmarkGoLogTextPositive(b *testing.B) {
 
 func BenchmarkGoLogTextNegative(b *testing.B) {
 	stream := &blackholeStream{}
-	handler := log.NewLoggerHandler(stream)
-	formatter := log.NewTextFormatter()
-	formatter.NoColor = true
-	formatter.DisableTimestamp = true
-	handler.SetFormatter(formatter)
-	handler.SetLevel(log.ErrorLevel)
-	logger := log.NewLogger()
-	logger.AddHandler(handler)
+	cfg := config.Config{
+		Level:    log.ERROR,
+		Encoding: "console",
+		ConsoleEncoderConfig: config.ConsoleEncoderConfig{
+			DisableTimestamp: true,
+		},
+		Writer: config.WriterConfig{
+			Type:         "custom",
+			CustomWriter: stream,
+		},
+	}
+	logger, err := golog.NewLoggerByConfig("test", cfg)
+	if err != nil {
+		b.Fatal(err)
+	}
 	b.ResetTimer()
 
 	b.RunParallel(func(pb *testing.PB) {
@@ -54,18 +70,27 @@ func BenchmarkGoLogTextNegative(b *testing.B) {
 
 func BenchmarkGoLogJSONNegative(b *testing.B) {
 	stream := &blackholeStream{}
-	handler := log.NewLoggerHandler(stream)
-	formatter := log.NewJSONFormatter()
-	handler.SetFormatter(formatter)
-	handler.SetLevel(log.ErrorLevel)
-	logger := log.NewLogger()
-	logger.AddHandler(handler)
+	cfg := config.Config{
+		Level:    log.ERROR,
+		Encoding: "json",
+		JSONEncoderConfig: config.JSONEncoderConfig{
+			DisableTimestamp: true,
+		},
+		Writer: config.WriterConfig{
+			Type:         "custom",
+			CustomWriter: stream,
+		},
+	}
+	logger, err := golog.NewLoggerByConfig("test", cfg)
+	if err != nil {
+		b.Fatal(err)
+	}
 	b.ResetTimer()
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			logger.
-				WithFields(log.F("rate", "15"), log.F("low", 16), log.F("high", 123.2)).
+				WithFields(golog.F("rate", "15"), golog.F("low", 16), golog.F("high", 123.2)).
 				Info("The quick brown fox jumps over the lazy dog")
 		}
 	})
@@ -77,18 +102,27 @@ func BenchmarkGoLogJSONNegative(b *testing.B) {
 
 func BenchmarkGoLogJSONPositive(b *testing.B) {
 	stream := &blackholeStream{}
-	handler := log.NewLoggerHandler(stream)
-	formatter := log.NewJSONFormatter()
-	handler.SetFormatter(formatter)
-	handler.SetLevel(log.InfoLevel)
-	logger := log.NewLogger()
-	logger.AddHandler(handler)
+	cfg := config.Config{
+		Level:    log.INFO,
+		Encoding: "json",
+		JSONEncoderConfig: config.JSONEncoderConfig{
+			DisableTimestamp: true,
+		},
+		Writer: config.WriterConfig{
+			Type:         "custom",
+			CustomWriter: stream,
+		},
+	}
+	logger, err := golog.NewLoggerByConfig("test", cfg)
+	if err != nil {
+		b.Fatal(err)
+	}
 	b.ResetTimer()
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			logger.
-				WithFields(log.F("rate", "15"), log.F("low", 16), log.F("high", 123.2)).
+				WithFields(golog.F("rate", "15"), golog.F("low", 16), golog.F("high", 123.2)).
 				Info("The quick brown fox jumps over the lazy dog")
 		}
 	})
