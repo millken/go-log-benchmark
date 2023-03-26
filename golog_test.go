@@ -4,19 +4,18 @@ import (
 	"testing"
 
 	"github.com/millken/golog"
-	"github.com/millken/golog/config"
-	"github.com/millken/golog/log"
 )
 
-func BenchmarkGoLogTextPositive(b *testing.B) {
+func BenchmarkGoLog_TextPositive(b *testing.B) {
 	stream := &blackholeStream{}
-	cfg := config.Config{
-		Level:    log.INFO,
-		Encoding: "console",
-		ConsoleEncoderConfig: config.ConsoleEncoderConfig{
+	cfg := golog.Config{
+		Level:    golog.INFO,
+		Encoding: golog.TextEncoding,
+		TextEncoderConfig: golog.TextEncoderConfig{
 			DisableTimestamp: true,
+			DisableColor:     true,
 		},
-		Writer: config.WriterConfig{
+		Writer: golog.WriterConfig{
 			Type:         "custom",
 			CustomWriter: stream,
 		},
@@ -38,15 +37,15 @@ func BenchmarkGoLogTextPositive(b *testing.B) {
 	}
 }
 
-func BenchmarkGoLogTextNegative(b *testing.B) {
+func BenchmarkGoLog_TextNegative(b *testing.B) {
 	stream := &blackholeStream{}
-	cfg := config.Config{
-		Level:    log.ERROR,
-		Encoding: "console",
-		ConsoleEncoderConfig: config.ConsoleEncoderConfig{
+	cfg := golog.Config{
+		Level:    golog.ERROR,
+		Encoding: golog.TextEncoding,
+		TextEncoderConfig: golog.TextEncoderConfig{
 			DisableTimestamp: true,
 		},
-		Writer: config.WriterConfig{
+		Writer: golog.WriterConfig{
 			Type:         "custom",
 			CustomWriter: stream,
 		},
@@ -68,15 +67,15 @@ func BenchmarkGoLogTextNegative(b *testing.B) {
 	}
 }
 
-func BenchmarkGoLogJSONNegative(b *testing.B) {
+func BenchmarkGoLog_JSONNegative(b *testing.B) {
 	stream := &blackholeStream{}
-	cfg := config.Config{
-		Level:    log.ERROR,
-		Encoding: "json",
-		JSONEncoderConfig: config.JSONEncoderConfig{
+	cfg := golog.Config{
+		Level:    golog.ERROR,
+		Encoding: golog.JSONEncoding,
+		JSONEncoderConfig: golog.JSONEncoderConfig{
 			DisableTimestamp: true,
 		},
-		Writer: config.WriterConfig{
+		Writer: golog.WriterConfig{
 			Type:         "custom",
 			CustomWriter: stream,
 		},
@@ -89,9 +88,7 @@ func BenchmarkGoLogJSONNegative(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			logger.
-				WithFields(golog.F("rate", "15"), golog.F("low", 16), golog.F("high", 123.2)).
-				Info("The quick brown fox jumps over the lazy dog")
+			logger.Info("The quick brown fox jumps over the lazy dog", "rate", 15, "low", 16, "high", 123.2)
 		}
 	})
 
@@ -100,15 +97,15 @@ func BenchmarkGoLogJSONNegative(b *testing.B) {
 	}
 }
 
-func BenchmarkGoLogJSONPositive(b *testing.B) {
+func BenchmarkGoLog_JSONPositive(b *testing.B) {
 	stream := &blackholeStream{}
-	cfg := config.Config{
-		Level:    log.INFO,
+	cfg := golog.Config{
+		Level:    golog.INFO,
 		Encoding: "json",
-		JSONEncoderConfig: config.JSONEncoderConfig{
+		JSONEncoderConfig: golog.JSONEncoderConfig{
 			DisableTimestamp: true,
 		},
-		Writer: config.WriterConfig{
+		Writer: golog.WriterConfig{
 			Type:         "custom",
 			CustomWriter: stream,
 		},
@@ -121,9 +118,7 @@ func BenchmarkGoLogJSONPositive(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			logger.
-				WithFields(golog.F("rate", "15"), golog.F("low", 16), golog.F("high", 123.2)).
-				Info("The quick brown fox jumps over the lazy dog")
+			logger.Info("The quick brown fox jumps over the lazy dog", "rate", 15, "low", 16, "high", 123.2)
 		}
 	})
 

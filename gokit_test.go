@@ -40,7 +40,7 @@ func (s *synchronizedStream) Write(p []byte) (int, error) {
 	return n, err
 }
 
-func BenchmarkGokitJSONPositive(b *testing.B) {
+func BenchmarkGokit_JSONPositive(b *testing.B) {
 	stream := &synchronizedStream{}
 	logger := log.With(log.NewJSONLogger(stream), "ts", log.DefaultTimestampUTC)
 	lvllog := newLeveledLogger(logger, true)
@@ -58,7 +58,7 @@ func BenchmarkGokitJSONPositive(b *testing.B) {
 	}
 }
 
-func BenchmarkGokitJSONNegative(b *testing.B) {
+func BenchmarkGokit_JSONNegative(b *testing.B) {
 	stream := &synchronizedStream{}
 	logger := log.With(log.NewJSONLogger(stream), "ts", log.DefaultTimestampUTC)
 	lvllog := newLeveledLogger(logger, false)
@@ -76,7 +76,7 @@ func BenchmarkGokitJSONNegative(b *testing.B) {
 	}
 }
 
-func BenchmarkGokitTextPositive(b *testing.B) {
+func BenchmarkGokit_TextPositive(b *testing.B) {
 	stream := &synchronizedStream{}
 	logger := log.With(log.NewLogfmtLogger(stream), "ts", log.DefaultTimestampUTC)
 	lvllog := newLeveledLogger(logger, true)
@@ -94,7 +94,7 @@ func BenchmarkGokitTextPositive(b *testing.B) {
 	}
 }
 
-func BenchmarkGokitTextNegative(b *testing.B) {
+func BenchmarkGokit_TextNegative(b *testing.B) {
 	stream := &synchronizedStream{}
 	logger := log.With(log.NewLogfmtLogger(stream), "ts", log.DefaultTimestampUTC)
 	lvllog := newLeveledLogger(logger, false)

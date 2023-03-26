@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func BenchmarkBuildinTextPositive(b *testing.B) {
+func BenchmarkBuildin_TextPositive(b *testing.B) {
 	stream := &blackholeStream{}
 	logger := log.New(stream, "", 0)
 	b.ResetTimer()

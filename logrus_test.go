@@ -6,7 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func BenchmarkLogrusTextPositive(b *testing.B) {
+func BenchmarkLogrus_TextPositive(b *testing.B) {
 	stream := &blackholeStream{}
 	logger := log.New()
 	logger.Formatter = &log.TextFormatter{
@@ -28,7 +28,7 @@ func BenchmarkLogrusTextPositive(b *testing.B) {
 	}
 }
 
-func BenchmarkLogrusTextNegative(b *testing.B) {
+func BenchmarkLogrus_TextNegative(b *testing.B) {
 	stream := &blackholeStream{}
 	logger := log.New()
 	logger.Level = log.ErrorLevel
@@ -51,7 +51,7 @@ func BenchmarkLogrusTextNegative(b *testing.B) {
 	}
 }
 
-func BenchmarkLogrusJSONNegative(b *testing.B) {
+func BenchmarkLogrus_JSONNegative(b *testing.B) {
 	stream := &blackholeStream{}
 	logger := log.New()
 	logger.Level = log.ErrorLevel
@@ -74,7 +74,7 @@ func BenchmarkLogrusJSONNegative(b *testing.B) {
 	}
 }
 
-func BenchmarkLogrusJSONPositive(b *testing.B) {
+func BenchmarkLogrus_JSONPositive(b *testing.B) {
 	stream := &blackholeStream{}
 	logger := log.New()
 	logger.Formatter = &log.JSONFormatter{}

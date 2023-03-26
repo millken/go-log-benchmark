@@ -6,7 +6,7 @@ import (
 	log "github.com/op/go-logging"
 )
 
-func BenchmarkGologgingTextNegative(b *testing.B) {
+func BenchmarkGologging_TextNegative(b *testing.B) {
 	stream := &blackholeStream{}
 	logger := log.MustGetLogger("")
 	subBackend := log.NewLogBackend(stream, "", 0)
@@ -28,7 +28,7 @@ func BenchmarkGologgingTextNegative(b *testing.B) {
 	}
 }
 
-func BenchmarkGologgingTextPositive(b *testing.B) {
+func BenchmarkGologging_TextPositive(b *testing.B) {
 	stream := &blackholeStream{}
 	logger := log.MustGetLogger("")
 	subBackend := log.NewLogBackend(stream, "", 0)
