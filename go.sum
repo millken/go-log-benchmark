@@ -23,8 +23,8 @@ github.com/mattn/go-isatty v0.0.14/go.mod h1:7GGIvUiUoEMVVmxf/4nioHXj79iQHKdU27k
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
 github.com/mattn/go-isatty v0.0.18 h1:DOKFKCQ7FNG2L1rbrmstDN4QVRdS89Nkh85u68Uwp98=
 github.com/mattn/go-isatty v0.0.18/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
-github.com/millken/golog v1.5.4 h1:IGF90bT9vgt66mdnqNb8TpHbBpjXjp2nAgZb3J22Om4=
-github.com/millken/golog v1.5.4/go.mod h1:PAY+RvZER947ESY6wsV2OnjAIvgQQRdZu/pDHY+f1hk=
+github.com/millken/golog v1.5.5 h1:eVXi+D5R19vS93cT+btT3QFP3hjEu03LzPzp6F04OA8=
+github.com/millken/golog v1.5.5/go.mod h1:PAY+RvZER947ESY6wsV2OnjAIvgQQRdZu/pDHY+f1hk=
 github.com/op/go-logging v0.0.0-20160315200505-970db520ece7 h1:lDH9UUVJtmYCjyT0CI4q8xvlXPxeZ0gYCVvWbmPlp88=
 github.com/op/go-logging v0.0.0-20160315200505-970db520ece7/go.mod h1:HzydrMdWErDVzsI23lYNej1Htcns9BCg93Dk0bBINWk=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
