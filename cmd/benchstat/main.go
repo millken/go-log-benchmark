@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Dataset struct {
@@ -78,7 +79,7 @@ func main() {
 			jsonPositive = append(jsonPositive, dataset)
 		}
 	}
-	markdownResult := fmt.Sprintf("## TextNegative\n%s\n## JSONNegative\n%s\n## TextPositive\n%s\n## JSONPositive\n%s\n", textNegative.MarkdownResult(), jsonNegative.MarkdownResult(), textPositive.MarkdownResult(), jsonPositive.MarkdownResult())
+	markdownResult := fmt.Sprintf("# Benchmark Results (%s)\n## TextNegative\n%s\n## JSONNegative\n%s\n## TextPositive\n%s\n## JSONPositive\n%s\n", time.Now().Format("2006-01-02"), textNegative.MarkdownResult(), jsonNegative.MarkdownResult(), textPositive.MarkdownResult(), jsonPositive.MarkdownResult())
 	os.WriteFile("benchmark_result.md", []byte(markdownResult), 0644)
 
 }

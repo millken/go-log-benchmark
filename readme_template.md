@@ -26,5 +26,3 @@ make bench
 
 ```
 
-# Benchmark Results
-
