@@ -12,7 +12,7 @@ func BenchmarkGoLog_TextPositive(b *testing.B) {
 		Level:    golog.INFO,
 		Encoding: golog.TextEncoding,
 		TextEncoder: golog.TextEncoderConfig{
-			DisableTimestamp: true,
+			DisableTimestamp: false,
 			DisableColor:     true,
 		},
 		Handler: golog.HandlerConfig{
@@ -43,7 +43,7 @@ func BenchmarkGoLog_TextNegative(b *testing.B) {
 		Level:    golog.ERROR,
 		Encoding: golog.TextEncoding,
 		TextEncoder: golog.TextEncoderConfig{
-			DisableTimestamp: true,
+			DisableTimestamp: false,
 		},
 		Handler: golog.HandlerConfig{
 			Type:   "custom",
@@ -73,7 +73,7 @@ func BenchmarkGoLog_JSONNegative(b *testing.B) {
 		Level:    golog.ERROR,
 		Encoding: golog.JSONEncoding,
 		JSONEncoder: golog.JSONEncoderConfig{
-			DisableTimestamp: true,
+			DisableTimestamp: false,
 		},
 		Handler: golog.HandlerConfig{
 			Type:   "custom",
@@ -103,7 +103,7 @@ func BenchmarkGoLog_JSONPositive(b *testing.B) {
 		Level:    golog.INFO,
 		Encoding: golog.JSONEncoding,
 		JSONEncoder: golog.JSONEncoderConfig{
-			DisableTimestamp: true,
+			DisableTimestamp: false,
 		},
 		Handler: golog.HandlerConfig{
 			Type:   "custom",
