@@ -1,7 +1,7 @@
 GOTEST_FLAGS=-cpu=1,2,4 -benchmem -benchtime=5s
 
-TEXT_PKGS=Gokit Logrus Log15 Gologging Seelog Zerolog GoLog Zap
-JSON_PKGS=Gokit Logrus Log15 Zerolog GoLog Zap
+TEXT_PKGS=Gokit Logrus Zerolog GoLog Zap
+JSON_PKGS=Gokit Logrus Zerolog GoLog Zap
 
 TEXT_PKG_TARGETS=$(addprefix test-text-,$(TEXT_PKGS))
 JSON_PKG_TARGETS=$(addprefix test-json-,$(JSON_PKGS))

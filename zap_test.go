@@ -10,12 +10,15 @@ import (
 func BenchmarkZap_TextPositive(b *testing.B) {
 	stream := &blackholeStream{}
 	w := zapcore.AddSync(stream)
-	core := zapcore.NewCore(
-		zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig()),
+	encoderCfg := zap.NewProductionEncoderConfig()
+	encoderCfg.TimeKey = "timestamp"
+	encoderCfg.EncodeTime = zapcore.ISO8601TimeEncoder
+
+	logger := zap.New(zapcore.NewCore(
+		zapcore.NewJSONEncoder(encoderCfg),
 		w,
 		zap.InfoLevel,
-	)
-	logger := zap.New(core)
+	), zap.WithCaller(false))
 
 	b.ResetTimer()
 

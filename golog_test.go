@@ -88,7 +88,7 @@ func BenchmarkGoLog_JSONNegative(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			logger.Info("The quick brown fox jumps over the lazy dog", "rate", 15, "low", 16, "high", 123.2)
+			logger.Info("The quick brown fox jumps over the lazy dog", "rate", "15", "low", 16, "high", 123.2)
 		}
 	})
 
@@ -118,7 +118,7 @@ func BenchmarkGoLog_JSONPositive(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			logger.Info("The quick brown fox jumps over the lazy dog", "rate", 15, "low", 16, "high", 123.2)
+			logger.Info("The quick brown fox jumps over the lazy dog", "rate", "15", "low", 16, "high", 123.2)
 		}
 	})
 

@@ -49,7 +49,7 @@ func BenchmarkGokit_JSONPositive(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			lvllog.Info.Log("msg", "The quick brown fox jumps over the lazy dog", "rate", 15, "low", 16, "high", 123.2)
+			lvllog.Info.Log("msg", "The quick brown fox jumps over the lazy dog", "rate", "15", "low", 16, "high", 123.2)
 		}
 	})
 
@@ -67,7 +67,7 @@ func BenchmarkGokit_JSONNegative(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			lvllog.Info.Log("msg", "The quick brown fox jumps over the lazy dog", "rate", 15, "low", 16, "high", 123.2)
+			lvllog.Info.Log("msg", "The quick brown fox jumps over the lazy dog", "rate", "15", "low", 16, "high", 123.2)
 		}
 	})
 
