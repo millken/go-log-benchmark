@@ -11,13 +11,13 @@ func BenchmarkGoLog_TextPositive(b *testing.B) {
 	cfg := golog.Config{
 		Level:    golog.INFO,
 		Encoding: golog.TextEncoding,
-		TextEncoderConfig: golog.TextEncoderConfig{
+		TextEncoder: golog.TextEncoderConfig{
 			DisableTimestamp: true,
 			DisableColor:     true,
 		},
-		Writer: golog.WriterConfig{
-			Type:         "custom",
-			CustomWriter: stream,
+		Handler: golog.HandlerConfig{
+			Type:   "custom",
+			Writer: stream,
 		},
 	}
 	logger, err := golog.NewLoggerByConfig("test", cfg)
@@ -42,12 +42,12 @@ func BenchmarkGoLog_TextNegative(b *testing.B) {
 	cfg := golog.Config{
 		Level:    golog.ERROR,
 		Encoding: golog.TextEncoding,
-		TextEncoderConfig: golog.TextEncoderConfig{
+		TextEncoder: golog.TextEncoderConfig{
 			DisableTimestamp: true,
 		},
-		Writer: golog.WriterConfig{
-			Type:         "custom",
-			CustomWriter: stream,
+		Handler: golog.HandlerConfig{
+			Type:   "custom",
+			Writer: stream,
 		},
 	}
 	logger, err := golog.NewLoggerByConfig("test", cfg)
@@ -72,12 +72,12 @@ func BenchmarkGoLog_JSONNegative(b *testing.B) {
 	cfg := golog.Config{
 		Level:    golog.ERROR,
 		Encoding: golog.JSONEncoding,
-		JSONEncoderConfig: golog.JSONEncoderConfig{
+		JSONEncoder: golog.JSONEncoderConfig{
 			DisableTimestamp: true,
 		},
-		Writer: golog.WriterConfig{
-			Type:         "custom",
-			CustomWriter: stream,
+		Handler: golog.HandlerConfig{
+			Type:   "custom",
+			Writer: stream,
 		},
 	}
 	logger, err := golog.NewLoggerByConfig("test", cfg)
@@ -101,13 +101,13 @@ func BenchmarkGoLog_JSONPositive(b *testing.B) {
 	stream := &blackholeStream{}
 	cfg := golog.Config{
 		Level:    golog.INFO,
-		Encoding: "json",
-		JSONEncoderConfig: golog.JSONEncoderConfig{
+		Encoding: golog.JSONEncoding,
+		JSONEncoder: golog.JSONEncoderConfig{
 			DisableTimestamp: true,
 		},
-		Writer: golog.WriterConfig{
-			Type:         "custom",
-			CustomWriter: stream,
+		Handler: golog.HandlerConfig{
+			Type:   "custom",
+			Writer: stream,
 		},
 	}
 	logger, err := golog.NewLoggerByConfig("test", cfg)

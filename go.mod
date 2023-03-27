@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/cihub/seelog v0.0.0-20170130134532-f561c5e57575
 	github.com/go-kit/kit v0.12.0
-	github.com/millken/golog v1.5.5
+	github.com/millken/golog v1.5.6
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/rs/zerolog v1.29.0
 	github.com/sirupsen/logrus v1.9.0
