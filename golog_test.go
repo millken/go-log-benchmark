@@ -19,6 +19,7 @@ func BenchmarkGoLog_TextPositive(b *testing.B) {
 			Type:   "custom",
 			Writer: stream,
 		},
+		//CallerLevels: []golog.Level{golog.INFO},
 	}
 	logger, err := golog.NewLoggerByConfig("test", cfg)
 	if err != nil {
@@ -28,7 +29,7 @@ func BenchmarkGoLog_TextPositive(b *testing.B) {
 
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			logger.Info("The quick brown fox jumps over the lazy dog")
+			logger.Info("The quick brown fox jumps over the lazy dog", "rate", "15", "low", 16, "high", 123.2)
 		}
 	})
 

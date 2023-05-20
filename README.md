@@ -26,41 +26,41 @@ make bench
 
 ```
 
-# Benchmark Results (2023-03-27)
+# Benchmark Results (2023-05-19)
 ## TextNegative
 | Name | ns/op | B/op | allocs/op |
 | --------- | --------- | --------- | --------- |
-| GoLog | 0.15 | 0 | 0 |
-| Logrus | 0.43 | 0 | 0 |
-| Zerolog | 0.53 | 0 | 0 |
-| Gokit | 11.06 | 32 | 1 |
-| Zap | 48.98 | 192 | 1 |
+| GoLog | 0.14 | 0 | 0 |
+| Logrus | 0.42 | 0 | 0 |
+| Zerolog | 0.51 | 0 | 0 |
+| Gokit | 11.42 | 32 | 1 |
+| Zap | 49.89 | 192 | 1 |
 
 ## JSONNegative
 | Name | ns/op | B/op | allocs/op |
 | --------- | --------- | --------- | --------- |
-| GoLog | 0.82 | 0 | 0 |
-| Zerolog | 1.23 | 0 | 0 |
-| Gokit | 34.01 | 128 | 1 |
-| Zap | 48.86 | 192 | 1 |
-| Logrus | 155.40 | 496 | 4 |
+| GoLog | 0.79 | 0 | 0 |
+| Zerolog | 1.24 | 0 | 0 |
+| Gokit | 31.00 | 128 | 1 |
+| Zap | 51.31 | 192 | 1 |
+| Logrus | 161.00 | 496 | 4 |
 
 ## TextPositive
 | Name | ns/op | B/op | allocs/op |
 | --------- | --------- | --------- | --------- |
-| GoLog | 57.60 | 0 | 0 |
-| Zerolog | 73.78 | 0 | 0 |
-| Buildin | 199.30 | 48 | 1 |
-| Gokit | 216.50 | 256 | 4 |
-| Zap | 220.90 | 192 | 1 |
-| Logrus | 1415.00 | 520 | 15 |
+| Buildin | 203.30 | 48 | 1 |
+| Gokit | 209.20 | 256 | 4 |
+| GoLog | 288.80 | 408 | 4 |
+| Zap | 532.70 | 530 | 7 |
+| Logrus | 1421.00 | 520 | 15 |
+| Zerolog | 1597.00 | 2340 | 71 |
 
 ## JSONPositive
 | Name | ns/op | B/op | allocs/op |
 | --------- | --------- | --------- | --------- |
-| Zerolog | 74.32 | 0 | 0 |
-| GoLog | 80.66 | 0 | 0 |
-| Zap | 197.30 | 192 | 1 |
-| Gokit | 783.20 | 1465 | 22 |
-| Logrus | 2605.00 | 2132 | 32 |
+| GoLog | 70.05 | 0 | 0 |
+| Zerolog | 71.42 | 0 | 0 |
+| Zap | 222.00 | 192 | 1 |
+| Gokit | 745.30 | 1465 | 22 |
+| Logrus | 2668.00 | 2132 | 32 |
 

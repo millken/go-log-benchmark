@@ -7,6 +7,10 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
+var (
+	callerEnabled = false
+)
+
 func BenchmarkZap_TextPositive(b *testing.B) {
 	stream := &blackholeStream{}
 	w := zapcore.AddSync(stream)
@@ -15,10 +19,10 @@ func BenchmarkZap_TextPositive(b *testing.B) {
 	encoderCfg.EncodeTime = zapcore.ISO8601TimeEncoder
 
 	logger := zap.New(zapcore.NewCore(
-		zapcore.NewJSONEncoder(encoderCfg),
+		zapcore.NewConsoleEncoder(encoderCfg),
 		w,
 		zap.InfoLevel,
-	), zap.WithCaller(false))
+	), zap.WithCaller(callerEnabled))
 
 	b.ResetTimer()
 
